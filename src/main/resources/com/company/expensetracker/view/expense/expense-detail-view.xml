@@ -19,6 +19,7 @@
     <layout>
         <formLayout id="form" dataContainer="expenseDc">
             <textField id="nameField" property="name"/>
+            <select id="categoryField" property="category"/>
         </formLayout>
         <hbox id="detailActions">
             <button id="saveAndCloseBtn" action="saveAction"/>
