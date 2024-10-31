@@ -9,7 +9,9 @@ import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 
 @JmixEntity
-@Table(name = "EXPENSE")
+@Table(name = "EXPENSE", uniqueConstraints = {
+        @UniqueConstraint(name = "IDX_EXPENSE_UNQ", columnNames = {"NAME"})
+})
 @Entity
 public class Expense {
     @JmixGeneratedValue
@@ -22,9 +24,21 @@ public class Expense {
     @NotNull
     private String name;
 
+    @Column(name = "CATEGORY", nullable = false)
+    @NotNull
+    private String category;
+
     @Column(name = "VERSION", nullable = false)
     @Version
     private Integer version;
+
+    public ExpenseCategory getCategory() {
+        return category == null ? null : ExpenseCategory.fromId(category);
+    }
+
+    public void setCategory(ExpenseCategory category) {
+        this.category = category == null ? null : category.getId();
+    }
 
     public String getName() {
         return name;
